@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>textarea</title>
 </head>
 <body>
   
@@ -22,8 +22,9 @@
       4) 크기 조절
         rows, cols 속성 또는 CSS의 width, height 속성으로 크기를 조절할 수 있습니다.
     4. 주요 속성
-      속성명        | 설명
-      --------------|---------------------------------------------
+      -----------------------------------------------------------------
+      속성          | 설명
+      --------------|--------------------------------------------------
       name          | 서버로 전송될 때 사용할 변수명 지정
       rows          | 표시할 행(줄)의 개수 지정
       cols          | 표시할 열(가로 너비, 문자 단위) 지정
@@ -35,7 +36,14 @@
       required      | 폼 제출 전 반드시 입력하도록 설정
       wrap          | 줄바꿈 방식 지정(soft: 기본, hard: 줄바꿈 포함)
       form          | 소속할 form 요소의 id 지정(폼 외부에 있을 때 사용)
+      ------------------------------------------------------------------
   -->
+
+  <form action="/textarea">
+    <textarea name="comment" placeholder="여기에 댓글을 입력하세요" rows="5" cols="30"></textarea>
+    <br>
+    <input type="submit" value="제출">
+  </form>
 
 </body>
 </html>
