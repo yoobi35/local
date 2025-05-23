@@ -230,7 +230,34 @@
       2) border-box
         (1) width/height에 테두리 영역까지 포함됩니다.
         (2) width/height에 마진을 제외한 모든 영역이 포함됩니다.
+    3. 크기 계산 공식
+      1) content-box
+        (1) 너비: width + padding-left + padding-right + border-left + border-right + (margin-left + margin-right)
+        (2) 높이: height + padding-top + padding-bottom + border-top + border-botton + (margin-top + margin-bottom)
+      2) border-box
+        (1) 너비: width + (margin-left + margin-right)
+        (2) 높이: height + (margin-top + margin-bottom)
   -->
+  <style>
+    .box9 {
+      box-sizing: content-box;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      width: 100px;
+      height: 100px;
+    }
+    .box10 {
+      box-sizing: border-box;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+  <div class="box9">box9</div>
+  <div class="box10">box10</div>
 
 </body>
 </html>
