@@ -185,6 +185,52 @@
         └─────┘
            7
   -->
+  <style>
+    .box7 {
+      border: 1px solid black;
+      margin: 20px;
+    }
+    .box8 {
+      border: 1px solid black;
+      width: 100px;
+      height: 50px;
+      margin: 0 auto;  /* 박스를 화면의 수평 가운데로 보내기 위해서 좌우 마진을 auto로 설정합니다. */
+    }
+  </style>
+  <div class="box7">box7</div>
+  <div class="box7">box7</div>
+  <div class="box8">box8</div>
+
+  <!--
+    Box 기본 구조
+
+    +-------------------------------+
+    |           margin              |
+    |  +-------------------------+  |
+    |  |        border           |  |
+    |  |  +-------------------+  |  |
+    |  |  |     padding       |  |  |
+    |  |  |  +-------------+  |  |  |
+    |  |  |  |  content    |  |  |  |
+    |  |  |  +-------------+  |  |  |
+    |  |  +-------------------+  |  |
+    |  +-------------------------+  |
+    +-------------------------------+
+  -->
+
+  <!--
+    Box Sizing
+
+    1. 박스의 크기를 계산하는 방법입니다.
+    2. box-sizing 속성에 따라 박스의 크기를 계산하는 방법이 달라집니다.
+      1) content-box
+        (1) 기본값입니다.
+        (2) width/height에 컨텐츠 영역이 포함됩니다.
+        (3) width/height에 테두리, 패딩, 마진 영역은 포함되지 않습니다.
+      2) border-box
+        (1) width/height에 테두리 영역까지 포함됩니다.
+        (2) width/height에 마진을 제외한 모든 영역이 포함됩니다.
+  -->
 
 </body>
 </html>
