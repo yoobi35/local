@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>box-model</title>
+</head>
+<body>
+  
+  <!--
+    border
+
+    1. 테두리를 지정하는 단축 속성입니다.
+    2. 테두리 두께, 종류, 색상을 지정할 수 있습니다.
+    3. 원하는 위치의 테두리만 지정할 수 있습니다.
+  -->
+  <style>
+    .box1 {
+      border: 1px solid black;
+    }
+    .box2 {
+      border-left: 1px dotted black;
+      border-right: 1px dotted black;
+      border-top: 1px dashed black;
+      border-bottom: 1px dashed black;
+    }
+  </style>
+  <div class="box1">box1</div>
+  <span class="box1">box1</span>
+  <div class="box2">box2</div>
+
+  <!--
+    border-radius
+
+    1. 테두리 모서리를 지정한 크기만큼 둥글게 다듬는 속성입니다.
+    2. 4가지 사용 방법
+      1) border-radius: 5px;
+        ┌─────┐
+        |5   5|
+        |     |
+        |5   5|
+        └─────┘
+      2) border-radius: 5px 6px;
+        ┌─────┐
+        |5   6|
+        |     |
+        |6   5|
+        └─────┘
+      3) border-radius: 5px 6px 7px;
+        ┌─────┐
+        |5   6|
+        |     |
+        |6   7|
+        └─────┘
+      4) border-radius: 5px 6px 7px 8px;
+        ┌─────┐
+        |5   6|
+        |     |
+        |8   7|
+        └─────┘
+  -->
+  <style>
+    .box3 {
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+  </style>
+  <div class="box3">box3</div>
+
+
+</body>
+</html>
