@@ -287,6 +287,20 @@
   func();
   retFunction()();
 
+  // 연습) 어떤 놀이기구는 몸무게가 90 이상인 경우 이용이 불가능합니다. 
+  //       몸무게가 40 미만인 경우 부모의 동의가 있으면 이용이 가능합니다. (confirm 함수를 찾아보세요.)
+  //       나머지 경우에는 부모의 동의가 없어도 이용이 가능합니다.
+  //       prompt를 이용해서 몸무게를 입력 받아 isPossible 함수에 전달합니다.
+  //       isPossible 함수는 놀이기구의 이용이 가능하면 true 아니면 false를 반환합니다.
+  //       최종 실행 시 "놀이기구 탑승이 가능합니다.", "놀이기구 탑승이 거절되었습니다." 중 하나의 메시지를 출력합니다.
+
+  function isPossible(weight) {
+    return weight >= 90 ? false : weight >= 40 ? true : confirm("탑승을 동의하시면 확인, 아니면 취소를 눌러주세요.");
+  }
+
+  document.write(isPossible(prompt("몸무게가 얼마에요?")) ? "<div>놀이기구 탑승이 가능합니다.</div>" : "<div>놀이기구 탑승이 거절되었습니다.</div>");
+
+
 </script>
 
 </body>
