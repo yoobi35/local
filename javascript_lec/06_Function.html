@@ -17,10 +17,10 @@
 2. 함수 작성 방법
   1) 함수 선언식
     (1) function 키워드와 함수명으로 정의하고, 호이스팅됩니다.
-    (2) 형식: function 함수명() { ... }
+    (2) 형식: function 함수명() { ... }  //--------- 기명 함수 (이름이 있는 함수)
   2) 함수 표현식
     (1) 함수를 변수에 할당합니다. 호이스팅되지 않습니다.
-    (2) 형식: const 변수명 = function() { ... }
+    (2) 형식: const 변수명 = function() { ... }  //-- 익명 함수 (이름이 없는 함수)
   3) 화살표 함수
     (1) 간결한 함수 표현식을 지원합니다. this 바인딩이 불가합니다.
     (2) 형식: const 변수명 = () => { ... }
@@ -99,6 +99,195 @@
       })
     })
 -->
+
+<script>
+
+  //----- 1. 함수 선언식
+  function declaration() {
+    console.log('declare 함수가 호출되었습니다.');
+  }
+
+  //----- 2. 함수 표현식
+  const expr = function() {
+    console.log('expr 함수가 호출되었습니다.');
+  }
+
+  //----- 3. 화살표 함수
+  const arrow = () => {
+    console.log('arrow 함수가 호출되었습니다.');
+  }
+
+  // 함수 호출하기 (함수 실행하기)
+  declaration();
+  declaration();
+  expr();
+  expr();
+  arrow();
+  arrow();
+
+</script>
+
+<script>
+
+  //----- 함수에 일반 데이터 전달하기
+
+  function info(name, age) {  //-- ② 매개변수(Parameter): name, age (전달받는 곳)
+    console.log(name, age);
+  }
+
+  info("홍길동", 30);  //--------- ① 인자(Argument): "홍길동", 30 (전달하는 곳)
+  info("김영희", 20);  //--------- ① 인자(Argument): "김영희", 20 (전달하는 곳)
+
+  let name = "고길동";
+  let age = 40;
+  info(name, age);  //------------ ① 인자(Argument): name, age (전달하는 곳)
+
+</script>
+
+<script>
+
+  //----- 함수에 배열 전달하기
+
+  // 1) 배열을 받아서 사용하는 함수
+  const infoArray = function(numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+      console.log(numbers[i]);
+    }
+  }
+
+  infoArray([10, 20, 30,]);
+
+  // 2) rest 문법을 활용하는 함수
+  const infoRest = function(arg, ...rest) {  // 여기서 사용된 rest 매개변수는 배열입니다. 나머지 매개변수는 항상 마지막에 선언합니다.
+    console.log(arg);
+    for (let i = 0; i < rest.length; i++) {
+      console.log(rest[i]);
+    }
+  }
+
+  // 전달하는 인자(Argument)의 개수가 다른 경우
+  infoRest("x");
+  infoRest("x", "y");
+  infoRest("x", "y", "z");
+
+</script>
+
+<script>
+
+  //----- 함수에 객체 전달하기
+
+  // 객체가 전달되는 경우 매개변수 대신 구조 분해 할당 문법을 사용할 수 있습니다.
+  const infoObject = ({model, maker, price}) => {
+    console.log(model);
+    console.log(maker);
+    console.log(price);
+  }
+
+  // 인자로 객체를 사용
+  infoObject({
+    model: "BMW 530d",
+    maker: "BMW",
+    price: 8000,
+  });
+
+</script>
+
+<script>
+
+  //----- 콜백 함수
+
+  function handle(callback) {  //-- ② 전달된 익명 함수를 callback 매개변수에 저장합니다. (함수 표현식)
+    callback();  //---------------- ③ callback 함수를 호출합니다. 전달된 익명 함수가 실행됩니다.
+  }
+
+  handle(function() {  //---------- ① 익명 함수를 handle 함수에 인자로 전달합니다.
+    console.log('Anonymous 함수가 호출되었습니다.');
+  });
+
+  // 연습) greet 함수에 콜백 함수와 이름을 전달하면 해당 이름이 출력되도록 구성하기
+  function greet(callback, name) {  //------------- ② 전달된 인자 "민경태"를 매개변수 name에 저장합니다.
+    callback(name);  //---------------------------- ③ "민경태"(매개변수 name에 저장된 값)를 다시 callback 함수에 전달합니다. 여기에 있는 name은 인자입니다.
+  }
+
+  greet(function(name) {  //----------------------- ④ 전달된 인자 name이 익명 함수의 매개변수 name에 저장됩니다.
+    console.log("안녕하세요 " + name + "님");  //-- ⑤ 매개변수 name에 저장된 값을 사용합니다.
+  }, "민경태");  //-------------------------------- ① 인자 "민경태"를 green 함수의 매개변수 name에 전달합니다.
+
+  // 연습) summaryArray 함수에 콜백 함수와 양의 정수를 전달하면 1부터 전달된 양의 정수까지 모두 더한 결과를 출력하도록 구성하기
+  function summaryArray(callback, number) {
+    callback(number);
+  }
+
+  summaryArray(function(number) {
+    let sum = 0;
+    for (let n = 1; n <= number; n++) {
+      sum += n;
+    }
+    console.log(`1부터 ${number}까지 합은 ${sum}입니다.`);
+  }, 100);
+
+</script>
+
+<script>
+
+  //----- 반환
+
+  // 1) 항상 1 반환
+  function one() {
+    return 1;  //--------------- ① one 함수를 호출한 곳으로 1을 반환합니다.
+  }
+  const oneResult = one();  //-- ② 함수 호출은 반환 값으로 바뀝니다.
+  console.log(oneResult);
+
+  // 2) 전달된 값보다 1 큰 수 반환
+  function plusOne(arg) {
+    return arg + 1;
+  }
+  console.log(plusOne(10));
+
+  // 3) 배열을 전달하면 해당 배열의 모든 값을 더한 값을 반환
+  function sumArray(numbers) {
+    let total = 0;
+    for (const number of numbers) {
+      total += number;
+    }
+    return total;
+  }
+  const sumResult = sumArray([1, 2, 3, 4, 5]);
+  console.log(sumResult);
+
+  // 4) 배열을 반환하는 함수
+  function retArray() {
+    return ["봄", "여름", "가을", "겨울"];
+  }
+  const seasons = retArray();
+  console.log(seasons[0], seasons[seasons.length - 1]);
+  const [first, , , last] = retArray();  // 배열의 첫 요소와 4번째 요소를 저장하는 구조 분해 할당 문법
+  console.log(first, last);
+
+  // 5) 객체를 반환하는 함수
+  function retObject(nickname, age) {
+    return {
+      nickname: nickname,  //-- nickname: "홍길동"
+      age: age,  //------------ age: 30
+    }
+  }
+  const user = retObject("홍길동", 30);
+  console.log(user.nickname, user.age);
+  const { nickname } = retObject("김영희", 20);
+  console.log(nickname);
+
+  // 6) 함수를 반환하는 함수
+  function retFunction() {
+    return function() {
+      console.log('hello world');
+    }
+  }
+  const func = retFunction();
+  func();
+  retFunction()();
+
+</script>
 
 </body>
 </html>
