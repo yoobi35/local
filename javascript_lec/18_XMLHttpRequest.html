@@ -190,10 +190,12 @@
     xhr.open('get', `https://api.the${document.getElementById('kind').value}api.com/v1/images/search`);
     xhr.addEventListener('readystatechange', function() {
       if(xhr.readyState === 4) {
-        if(xhr.status === 200) {
+        if(xhr.status === 200) { console.log(xhr);
           // console.log(JSON.parse(xhr.responseText));       [ { id:'asd...', url:'http...', width: 500, height: 500} ]
-          const jsonData = JSON.parse(xhr.responseText)[0];
-          let str = `<img alt="강아지" src="${jsonData.url}" width="${jsonData.width}">`;
+          // const jsonData = JSON.parse(xhr.responseText)[0];
+          // const str = `<img alt="반려동물" src="${jsonData.url}" width="${jsonData.width}">`;
+          const { url, width } = JSON.parse(xhr.responseText)[0];
+          const str = `<img alt="반려동물" src="${url}" width="${width}">`;
           document.getElementById('random-image').innerHTML = str;
         }
       }
@@ -230,13 +232,20 @@
       if(xhr.readyState === 4) {
         if(xhr.status === 200) {
           const todos = JSON.parse(xhr.responseText);
-          
+          todos.map(todo => {  // todo: { userId:'', id:'', title:'', completed:true }
+            const str = `<tr>
+                           <td>${todo.userId}</td>
+                           <td>${todo.id}</td>
+                           <td>${todo.title}</td>
+                           <td><input type="checkbox" ${todo.completed ? 'checked' : ''}></td>
+                         </tr>`;
+            return str; 
+          }).forEach(str => document.getElementById('todos').innerHTML += str);
         }
       }
     })
     xhr.send();
   })
-
 
 </script>
 
