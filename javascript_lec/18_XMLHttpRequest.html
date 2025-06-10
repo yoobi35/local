@@ -173,6 +173,10 @@
 
 <hr>
 
+<select id="kind">
+  <option value="cat">고양이</option>
+  <option value="dog">강아지</option>
+</select>
 <button type="button" id="btn-random">요청하기</button>
 <div id="random-image"></div>
 <script>
@@ -183,16 +187,56 @@
 
   document.getElementById('btn-random').addEventListener('click', function() {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', 'https://api.thecatapi.com/v1/images/search');
+    xhr.open('get', `https://api.the${document.getElementById('kind').value}api.com/v1/images/search`);
     xhr.addEventListener('readystatechange', function() {
       if(xhr.readyState === 4) {
         if(xhr.status === 200) {
-          console.log(JSON.parse(xhr.responseText));
+          // console.log(JSON.parse(xhr.responseText));       [ { id:'asd...', url:'http...', width: 500, height: 500} ]
+          const jsonData = JSON.parse(xhr.responseText)[0];
+          let str = `<img alt="강아지" src="${jsonData.url}" width="${jsonData.width}">`;
+          document.getElementById('random-image').innerHTML = str;
         }
       }
     })
     xhr.send();
   })
+
+</script>
+
+<hr>
+
+<button type="button" id="btn-todos">Todos 요청하기</button>
+<table border="1">
+  <thead>
+    <tr>
+      <th>userId</th>
+      <th>id</th>
+      <th>title</th>
+      <th>completed</th>
+    </tr>
+  </thead>
+  <tbody id="todos"></tbody>
+</table>
+<script>
+
+  // 연습) todos 요청하여 해당 정보를 테이블에 표시하세요.
+  // 요청 주소는 https://jsonplaceholder.typicode.com/todos 입니다.
+  // completed 정보는 체크박스로 표시하세요. (true이면 체크상태로 하세요.)
+
+  document.getElementById('btn-todos').addEventListener('click', function() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('get', 'https://jsonplaceholder.typicode.com/todos');
+    xhr.addEventListener('readystatechange', function() {
+      if(xhr.readyState === 4) {
+        if(xhr.status === 200) {
+          const todos = JSON.parse(xhr.responseText);
+          
+        }
+      }
+    })
+    xhr.send();
+  })
+
 
 </script>
 
