@@ -128,5 +128,48 @@
   4) await 문이 없는 async 함수는 일반 함수처럼 동기적으로 실행됩니다.
 -->
 
+<button type="button" id="btn1">요청하기</button>
+<script>
+
+  //----- Response 객체 확인
+  document.getElementById('btn1').onclick = function() {
+    fetch('https://jsonplaceholder.typicode.com/todo')  //------------ 잘못된 주소로 요청하면 404 발생합니다.
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error('에러 상태 코드: ' + response.status);  //-- throw 문으로 던진 Error 객체는 catch() 메소드가 받습니다.
+        }
+        console.log(response);
+      })
+      .catch( errorMessage => console.log(errorMessage) );  //-------- Error 객체가 가진 에러 메시지를 받아서 출력합니다.
+  }
+
+</script>
+
+<hr>
+
+<button type="button" id="btn2">JSON요청</button>
+<script>
+
+  document.getElementById('btn2').onclick = function() {
+
+    //----- JSON 응답 받기
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => {
+        if(!response.ok) {
+
+        }
+        return response.json();
+      })
+      .then(jsonData => console.log(jsonData));
+
+    //----- 예외 처리를 제외한 축약 코드
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(jsonData => console.log(jsonData));
+
+  }
+
+</script>
+
 </body>
 </html>
