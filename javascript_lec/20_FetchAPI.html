@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>FetchAPI</title>
 </head>
 <body>
 
@@ -256,7 +256,7 @@
 
   document.getElementById('btn-add').onclick = function() {
 
-    //----- POST 요청하기 (POST 요청 시 데이터 전달하기)
+    //----- POST 요청하기 (POST 요청 시 JSON 데이터 전달하기)
 
     fetch('https://jsonplaceholder.typicode.com/posts', {  //-- 이 API는 POST 요청은 새로운 데이터의 등록을 의미합니다.
       method: 'post',
@@ -289,7 +289,7 @@
 
   document.getElementById('btn-upload').onclick = function() {
     
-    //----- POST 요청하기 (FormData를 이용한 데이터 전송하기)
+    //----- POST 요청하기 (FormData를 이용한 바이너리 데이터 전송하기)
     const formData = new FormData();  //----------------------------------- <form> 태그를 만들었다고 생각하세요.
     formData.append('image', document.getElementById('file').files[0]);  // image는 이 API에서 요구하는 파라미터 이름입니다.
 
