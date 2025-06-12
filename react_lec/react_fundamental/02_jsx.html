@@ -222,22 +222,35 @@
 
   // 연습) 아래 변수에 저장된 값을 <div> 태그로 화면에 표시하세요.
   const name = 'Tom';
+  const a = <div>{name}</div>;
 
   // 연습) 아래 객체에 저장된 값 중 model 속성만 <div> 태그로 화면에 표시하세요.
   const car = {
     model: 'sorento',
     price: 4000,
   }
+  const b = <div>{car.model}</div>;
 
   // 연습) 아래 score 값이 60 이상이면 "합격", 아니면 "불합격"을 <div> 태그로 화면에 표시하세요.
   const score = 80;
+  const c = <div>{ score >= 60 ? '합격' : '불합격' }</div>;
 
   // 연습) 아래 변수에 저장된 값이 없으면 "값없음", 값이 있으면 저장된 값을 <div> 태그로 화면에 표시하세요.
   let value;
+  const d = <div>{ value || '값없음' }</div>;
 
   // 연습) 아래 color 값이 "r"이면 "red", "g"이면 "green", "b"이면 "blue" 배경색을 <div> 태그에 적용해 화면에 표시하세요.
   //       (100 x 100 크기)
-  const color = "r";
+  const color = 'r';
+  const style = {
+    width: '100px',
+    height: '100px',
+    backgroundColor: color == 'r' ? 'red' : color == 'g' ? 'green' : color == 'b' ? 'blue' : 'white',
+  }
+  const e = <div style={style}></div>;
+
+  // rendering
+  ReactDOM.createRoot(document.getElementById('root8')).render([a, b, c, d, e]);
 
 </script>
 
