@@ -8,7 +8,7 @@
   <title>Element</title>
 </head>
 <body>
-  
+
 <!--
 1. react.development.js
   1) https://ko.legacy.reactjs.org/docs/cdn-links.html
@@ -34,9 +34,51 @@
 
 4. Rendering
   1) React Element 같은 구성 요소들을 화면에 그리는 작업입니다.
-  2) Root DOM Node : ReactDOM 에서 관리하는 DOM Node 입니다. React Element 들이 그려질(Rendering) 하나의 DOM Node 를 의미합니다.
-  3) ReactDOM 은 Element 와 그 자식 Element 를 이전의 Element 와 비교하고 변경된 부분만 업데이트 합니다.
+  2) Root DOM Node: ReactDOM에서 관리하는 DOM Node입니다. React Element들이 그려질(Rendering) 하나의 DOM Node를 의미합니다.
+  3) ReactDOM은 Element와 그 자식 Element를 이전의 Element와 비교하고 변경된 부분만 업데이트 합니다.
 -->
+
+<div id="root1"></div>
+<script>
+
+  //----- Element 만들기 (React.createElement() 메소드 이용)
+  const h1Element = React.createElement(
+    'h1',  //------------------ <h1></h1>
+    { 
+      id: 'title',  //--------- id="title"
+      className: 'title',  //-- class="title"
+    },
+    'Hello World'  //---------- <h1 id="title" class="title">Hello World</h1>
+  );
+
+  //----- rendering (Element를 화면에 표시하기)
+  const root1 = document.getElementById('root1');
+  ReactDOM.createRoot(root1).render(h1Element);
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script>
+
+  const root2 = ReactDOM.createRoot(document.getElementById('root2'));
+
+  setInterval(() => {
+    const textElement = React.createElement(
+      'div',
+      { className: 'text' },
+      '간단한 시계'
+    )
+    const timeElement = React.createElement(
+      'div',
+      { className: 'time' },
+      new Date().toLocaleTimeString()
+    )
+    root2.render([textElement, timeElement]);  // 여러 개의 Element는 배열로 전달해서 렌더링합니다.
+  }, 1000)
+
+</script>
 
 </body>
 </html>
