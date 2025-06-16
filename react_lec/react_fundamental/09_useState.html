@@ -32,10 +32,113 @@
       - 상태 변수의 초깃값입니다.
 
 
-3.. React의 상태 업데이트 함수의 두 가지 방식
+3. React의 상태 업데이트 함수의 두 가지 방식
   1) 값을 직접 전달하는 방식
   2) 함수(이전 상태 값을 받아 새로운 상태 값을 반환하는 함수)를 전달하는 방식 (함수형 업데이트)
 -->
+
+<div id="root1"></div>
+<script type="text/babel">
+
+  const Spin1 = () => {
+
+    // state = { number: 0 }
+    // number 변경 함수: setNumber
+    const [number, setNumber] = React.useState(0);
+
+    // 증가용 이벤트 핸들러
+    const increaseHandler = (e) => {
+      // number = number + 1;  //-- 사용할 수 없는 표현식입니다. 
+      setNumber(number + 1);  //--- 반드시 상태 업데이트 함수를 사용해야만 합니다.
+    }
+
+    // 감소용 이벤트 핸들러
+    const decreaseHandler = (e) => {
+      setNumber(number - 1);
+    }
+
+    return (
+      <>
+        <h1>{number}</h1>
+        <button onClick={increaseHandler}>▲</button>
+        <button onClick={decreaseHandler}>▼</button>
+      </>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root1')).render(<Spin1/>);
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script type="text/babel">
+
+  const Spin2 = () => {
+
+    const [number, setNumber] = React.useState(0);
+
+    const increaseHandler = (e) => {
+      //----- 함수형 업데이트
+      // 현재 state를 전달하고, 새로운 state를 반환하는 콜백 함수를 사용하는 방식입니다.
+      setNumber(prevNumber => prevNumber + 1);
+    }
+
+    const decreaseHandler = (e) => {
+      setNumber(prevNumber => prevNumber - 1);
+    }
+
+    return (
+      <>
+        <h1>{number}</h1>
+        <button onClick={increaseHandler}>△</button>
+        <button onClick={decreaseHandler}>▽</button>
+      </>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root2')).render(<Spin2/>)
+
+</script>
+
+<hr>
+
+<div id="root3"></div>
+<script type="text/babel">
+
+  //----- 입력 상자와 state
+
+  const InputComponent = () => {
+
+    // state
+    const [inputValue, setInputValue] = React.useState('')
+
+    // 입력 상자에 입력한 내용이 변하면 발생하는 이벤트: onChange
+    const handleChange = (e) => {
+      // console.log(e.target.value);
+      setInputValue(e.target.value);
+    }
+
+    return (
+      <>
+        <input 
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+          placeholder="값을 입력하세요"
+        />
+        <h1>{inputValue}</h1>
+      </>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root3')).render(<InputComponent/>)
+
+</script>
 
 </body>
 </html>
