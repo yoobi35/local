@@ -354,7 +354,7 @@
     }
 
     // 추가 등록 이벤트
-    const hancleClick = (e) => {
+    const handleClick = (e) => {
       if(inputValue.trim() === '') {
         alert('동물 이름을 입력하세요.');
         return;
@@ -378,7 +378,7 @@
         />
         <button 
           type="button"
-          onClick={hancleClick}
+          onClick={handleClick}
         >추가</button>
         <ul>
           {
