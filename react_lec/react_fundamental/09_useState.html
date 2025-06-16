@@ -140,5 +140,134 @@
 
 </script>
 
+<hr>
+
+<div id="root4"></div>
+<script type="text/babel">
+
+  //----- 체크박스와 state
+
+  const CheckboxComponent = () => {
+
+    // state
+    const [isChecked, setIsChecked] = React.useState(false);
+
+    // 체크 상태가 변할때마다 발생하는 이벤트: onChange
+    const handleChange = (e) => {
+      // console.log(e.target.checked);
+      setIsChecked(e.target.checked);
+    }
+
+    return (
+      <>
+        <input
+          type="checkbox"
+          id="chk"
+          checked={isChecked}
+          onChange={handleChange}
+        />
+        <label htmlFor="chk">체크박스</label>
+        {/* boolean 값은 표현식으로 화면에 표시할 수 없습니다. 문자열로 바꿔서 표시합니다. */}
+        <h1>{isChecked ? 'true' : 'false'}</h1>
+      </>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root4')).render(<CheckboxComponent/>)
+
+</script>
+
+<hr>
+
+<div id="root5"></div>
+<script type="text/babel">
+
+  //----- select 태그와 state
+
+  const SelectComponent = () => {
+
+    // state
+    const [selectedValue, setSelectedValue] = React.useState('');
+
+    // 선택을 바꿀때마다 발생하는 이벤트: onChange
+    const handleChange = (e) => {
+      setSelectedValue(e.target.value);
+    }
+
+    return (
+      <>
+        <select
+          value={selectedValue}
+          onChange={handleChange}
+        >
+          <option hidden value="">통신사 선택</option>
+          <option>skt</option>
+          <option>kt</option>
+          <option>lgu+</option>
+        </select>
+        <h1>{selectedValue}</h1>
+      </>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root5')).render(<SelectComponent/>)
+
+</script>
+
+<hr>
+
+<div id="root6"></div>
+<script type="text/babel">
+
+  //----- 로그인 화면과 state (state 2개 사용)
+
+  const LoginComponent = () => {
+
+    // state 2개
+    const [id, setId] = React.useState('');
+    const [pw, setPw] = React.useState('');
+
+    // submit 이벤트 핸들러
+    const handleSubmit = (e) => {
+      if(id === '' || pw === '') {
+        alert('아이디와 비밀번호 입력을 확인하세요.');
+        e.preventDefault();  //-- 서브밋을 막습니다.
+        return;  //-------------- 이벤트 핸들러의 실행을 막습니다.
+      }
+      alert(`id: ${id}, pw: ${pw}`);
+    }
+
+    return (
+      <form
+        action="/login"
+        method="post"
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          value={id}
+          onChange={e => setId(e.target.value)}
+          placeholder="아이디"
+        />
+        <br/>
+        <input
+          type="password"
+          value={pw}
+          onChange={e => setPw(e.target.value)}
+          placeholder="비밀번호"
+        />
+        <br/>
+        <button type="submit">로그인</button>
+      </form>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root6')).render(<LoginComponent/>);
+
+</script>
+
 </body>
 </html>
