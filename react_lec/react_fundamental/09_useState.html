@@ -547,7 +547,40 @@
   //       각 <input> 태그에 입력한 값들은 state 배열에 저장합니다.
   //       state 배열에 저장된 값들을 화면에 리스트 형식으로 출력하세요.
   const CreateInput = () => {
-
+    // state
+    const [values, setValues] = React.useState(['']);
+    // function
+    const valueChange = (value, i) => {
+      const changedValues = [...values];
+      changedValues[i] = value;
+      setValues(changedValues);
+    }
+    // click event handler
+    const handleClick = e => {
+      setValues([ ...values, '' ]);
+    }
+    return (
+      <>
+        <button onClick={handleClick}>Input추가</button>
+        { 
+          values.map((value, i) => { return (
+            <input
+              key={i}
+              value={value}
+              onChange={e => valueChange(e.target.value, i)}
+              style={{ display: 'block' }}
+            />
+          ) } )
+        }
+        <ul>
+        {
+          values.map((value, i) => { return (
+            <li key={i}>{value}</li>
+          ) } )
+        }
+        </ul>
+      </>
+    )
   }
   ReactDOM.createRoot(document.getElementById('root14')).render(<CreateInput/>)
 </script>
