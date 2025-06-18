@@ -522,17 +522,49 @@
     const [switches, setSwitches] = React.useState([false, false, false]);
     // click event 발생 시 동작하는 toggleSwitch 함수
     const toggleSwitch = id => {
-
+      setSwitches(switches.map((elem, i) => (id === i ? !elem : elem)))
     }
     return (
       <>
-        여기에서는 map으로 button 3개 만들어요
-        각 button을 클릭하면 toggleSwitch 함수를 호출하는데 이 때 각 button의 식별자를 전달해요
-        그럼 toggleSwitch 함수는 해당 식별자를 받아서 해당 버튼의 ON/OFF를 변경합니다
+        {
+          switches.map((elem, i) => (
+            <button key={i} onClick={() => toggleSwitch(i)}>
+              {`스위치${i + 1} ${elem ? 'ON' : 'OFF'}`}
+            </button>
+          ))
+        }
       </>
     )
   }
   ReactDOM.createRoot(document.getElementById('root13')).render(<MultiSwitch/>)
+</script>
+
+<hr>
+
+<div id="root14"></div>
+<script type="text/babel">
+  // 연습) 추가 버튼을 누를때마다 화면에 <input> 태그를 새롭게 추가합니다.
+  //       각 <input> 태그에 입력한 값들은 state 배열에 저장합니다.
+  //       state 배열에 저장된 값들을 화면에 리스트 형식으로 출력하세요.
+  const CreateInput = () => {
+
+  }
+  ReactDOM.createRoot(document.getElementById('root14')).render(<CreateInput/>)
+</script>
+
+<hr>
+
+<div id="root15"></div>
+<script type="text/babel">
+  // 연습) 이메일과 비밀번호를 입력 받은 뒤 검증 버튼을 클릭하면 
+  //       각 입력 상자 아래에 유효성 검사 결과를 출력하세요.
+  //       이메일: 이메일 형식이 아니면 "이메일 형식이 아닙니다."
+  //       비밀번호: 4글자 미만이면 "비밀번호는 4자 이상입니다."
+  //       이메일, 비밀번호, 유효성 검사 결과 모두 state로 관리해야 합니다.
+  const ValidateInput = () => {
+
+  }
+  ReactDOM.createRoot(document.getElementById('root15')).render(<ValidateInput/>)
 </script>
 
 </body>
